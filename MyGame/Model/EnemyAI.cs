@@ -87,7 +87,9 @@ namespace MyGame.Model
 
         private Strategy GetStrategy()
         {
-            var enemyTrench = GameModel.EnemyUnits.Where(x => Map.Trenches.Any(i => x.PosX <= i)).Min(x => x.PosX);
+            var enemyTrench = 1000;
+            if (GameModel.EnemyUnits.Count > 5) 
+                enemyTrench = GameModel.EnemyUnits.Where(x => Map.Trenches.Any(i => x.PosX <= i)).Min(x => x.PosX);
             var trenchNumber = 0;
             for (var i = 0; i < Map.Trenches.Length; i++)
             {
