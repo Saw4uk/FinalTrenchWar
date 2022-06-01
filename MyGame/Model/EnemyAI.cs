@@ -88,8 +88,12 @@ namespace MyGame.Model
         private Strategy GetStrategy()
         {
             var enemyTrench = 1000;
-            if (GameModel.EnemyUnits.Count > 5) 
-                enemyTrench = GameModel.EnemyUnits.Where(x => Map.Trenches.Any(i => x.PosX <= i)).Min(x => x.PosX);
+            var unitsInTrench = GameModel.EnemyUnits.Where(x => Map.Trenches.Any(i => x.PosX <= i));
+            var inTrench = unitsInTrench as Entity[] ?? unitsInTrench.ToArray();
+            if (inTrench.Count() != 0)
+            {
+                enemyTrench = inTrench.Min(x => x.PosX);
+            }
             var trenchNumber = 0;
             for (var i = 0; i < Map.Trenches.Length; i++)
             {
@@ -147,12 +151,16 @@ namespace MyGame.Model
 
         private void AllSuppliesToMainTrench()
         {
-            var maxTrenchCord = 1000;
-            if (GameModel.EnemyUnits.Count > 0) 
-                maxTrenchCord = GameModel.EnemyUnits.Where(x => Map.Trenches.Any(i => x.PosX <= i) && x.IsAlive == 1).Min(x => x.PosX);
+            var enemyTrench = 1000;
+            var unitsInTrench = GameModel.EnemyUnits.Where(x => Map.Trenches.Any(i => x.PosX <= i));
+            var inTrench = unitsInTrench as Entity[] ?? unitsInTrench.ToArray();
+            if (inTrench.Count() != 0)
+            {
+                enemyTrench = inTrench.Min(x => x.PosX);
+            }
             foreach (var unit in GameModel.EnemyUnits)
             {
-                unit.MoveToAllyTrench(maxTrenchCord);
+                unit.MoveToAllyTrench(enemyTrench);
             }
         }
         private void SpawnEnemies(int numberOfEnemies)

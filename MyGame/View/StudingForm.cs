@@ -23,11 +23,11 @@ namespace MyGame.View
 
         private void OnMouseClick(object sender, MouseEventArgs e)
         {
-            CurrentSlide++;
             if (CurrentSlide != ViewGraphics.Slides.Length)
                 this.BackgroundImage = ViewGraphics.Slides[CurrentSlide];
             else
             {
+                CurrentSlide = 0;
                 var form = Application.OpenForms[0];
                 form.StartPosition = FormStartPosition.Manual;
                 form.Top = Top;
@@ -44,6 +44,7 @@ namespace MyGame.View
                 this.BackgroundImage = ViewGraphics.Slides[CurrentSlide];
             else
             {
+                CurrentSlide = 0;
                 var form = Application.OpenForms[0];
                 form.StartPosition = FormStartPosition.Manual;
                 form.Top = Top;
