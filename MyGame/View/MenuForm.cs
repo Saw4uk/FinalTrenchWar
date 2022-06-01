@@ -205,10 +205,11 @@ namespace MyGame.View
         private void PlayButtonOnClick(object sender, EventArgs e)
         {
             Interface.PlayClickSound();
+            Interface.MainPlayer.Play();
             var gameModel = new GameModel(Complexity);
             var buttonController = new ButtonController(gameModel);
             var enemyAi = new EnemyAI(gameModel, buttonController,Complexity);
-            var game = new Form1(gameModel,buttonController,enemyAi,axWindowsMediaPlayer1)
+            var game = new GameForm(gameModel,buttonController,enemyAi,axWindowsMediaPlayer1)
             {
                 Location = new Point(Location.X, Location.Y)
             };

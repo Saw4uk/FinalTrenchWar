@@ -18,7 +18,7 @@ using Pen = System.Drawing.Pen;
 
 namespace MyGame
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
 
         private readonly GameModel GameModel;
@@ -48,7 +48,7 @@ namespace MyGame
         public Timer AddMoneyTimer;
         private AxWindowsMediaPlayer Player;
 
-        public Form1(GameModel gameModel, ButtonController buttonController, EnemyAI enemyAi,AxWindowsMediaPlayer player)
+        public GameForm(GameModel gameModel, ButtonController buttonController, EnemyAI enemyAi,AxWindowsMediaPlayer player)
         {
             GameModel = gameModel;
             ButtonController = buttonController;
